@@ -4,11 +4,51 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src=https://d3js.org/d3.v5.min.js></script>
+<script src=https://unpkg.com/viz.js@1.8.0/viz.js></script>
+<script src=https://unpkg.com/d3-graphviz@1.5.0/build/d3-graphviz.min.js></script>
+    <script src="index.js"></script>
     <title>Document</title>
 </head>
 <body>
+    <button onclick="test()" value="ok">Button</button>
+
+
+    <table border="1" id="table">
+
+        <tr>
+          <th>State Name</th>
+          <td align="center" width="40px">0</td>
+          <td align="center" width="40px">1</td>
+          <td align="center" width="40px">2</td>
+        </tr>
+        
+        <tr>
+          <th>Q1</th>
+          <td align="center" width="40px">Q2</td>
+          <td align="center" width="40px">Q2</td>
+          <td align="center" width="40px">Q3</td>
+        </tr>
+        
+        <tr>
+          <th>Q2</th>
+          <td align="center" width="40px">Q1</td>
+          <td align="center" width="40px">Q2</td>
+          <td align="center" width="40px">Q3</td>
+        </tr>
+        
+        <tr>
+            <th>Q3</th>
+            <td align="center" width="40px">Q1</td>
+          <td align="center" width="40px">Q2</td>
+          <td align="center" width="40px">Q3</td>
+          </tr>
+        
+        </table>
     
 
-    
+    <p id="demo"></p>
+
+    <div id="graph"></div>
 </body>
 </html>
