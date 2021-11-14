@@ -7,48 +7,54 @@
     <script src=https://d3js.org/d3.v5.min.js></script>
 <script src=https://unpkg.com/viz.js@1.8.0/viz.js></script>
 <script src=https://unpkg.com/d3-graphviz@1.5.0/build/d3-graphviz.min.js></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
     <script src="index.js"></script>
+    <link rel="stylesheet" href="styles.css">
     <title>Document</title>
-</head>
-<body>
-    <button onclick="test()" value="ok">Button</button>
-
-
-    <table border="1" id="table">
-
-        <tr>
-          <th>State Name</th>
-          <td align="center" width="40px">0</td>
-          <td align="center" width="40px">1</td>
-          <td align="center" width="40px">2</td>
-        </tr>
-        
-        <tr>
-          <th>Q1</th>
-          <td align="center" width="40px">Q2</td>
-          <td align="center" width="40px">Q2</td>
-          <td align="center" width="40px">Q3</td>
-        </tr>
-        
-        <tr>
-          <th>Q2</th>
-          <td align="center" width="40px">Q1</td>
-          <td align="center" width="40px">Q2</td>
-          <td align="center" width="40px">Q3</td>
-        </tr>
-        
-        <tr>
-            <th>Q3</th>
-            <td align="center" width="40px">Q1</td>
-          <td align="center" width="40px">Q2</td>
-          <td align="center" width="40px">Q3</td>
-          </tr>
-        
-        </table>
     
+</head>
+<body onload="loader()">
+
+
+
+    <button onclick="findtable()" value="ok">Button</button>
+
+<table align="center">
+    <tr>
+        <th>Language</th>
+        <th>Number of states</th>
+        <th></th><th></th>
+    </tr>
+
+    <tr>
+        <form id="form" name="form">
+       <td><input type="text" id="language" name="language" value="0-1" onkeypress="return /[a-z 0-9 -]/i.test(event.key)" placeholder="seperated by - " required></td>
+       <td> <input type="number" id="number" name="number" value="2" min="1" onkeypress="return /[0-9]/i.test(event.key)" required></td>
+
+       <td><button class="btn" id="submit" onclick ="submit_form()">Submit</button></td>
+       <td><input class="btn" id="reset" type="reset" onclick="delete_table()"></td>
+      
+    
+    </tr>
+
+    <tr>
+        <!-- <td><input type="text" id="language" name="language" value="0-1" onkeypress="return /[a-z 0-9 -]/i.test(event.key)" placeholder="seperated by - " required></td>
+        <td> <input type="number" id="number" name="number" value="2" min="1" onkeypress="return /[0-9]/i.test(event.key)" required></td> -->
+    </form>
+    </tr>
+</table>
+<br> <br> <br>
+<center>
+
+
+<table id="table" border="1"></table>
+<div id="graph"></div>
+</center>
+   
 
     <p id="demo"></p>
 
-    <div id="graph"></div>
+   
 </body>
-</html>
+</html>     
