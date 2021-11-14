@@ -135,22 +135,14 @@ else{
         
     }
     else {
-                      const td = tr.insertCell();
-                     // td.style.border = '1px solid black';
-                 
+                      const td = tr.insertCell();              
                     td.setAttribute("class", "transition_cell");
-
-                    // const input = document.createElement("input");
-                    // input.setAttribute("type", "text");
-                    // input.setAttribute("class", "transition_input");
-                    // input.setAttribute("onkeyup", "findtable()");
-
-
 
                     //Create and append select list
                     var selectList = document.createElement("select");
                    
                     selectList.setAttribute("class", "mySelect");
+                    selectList.setAttribute("id", `check${i}${j}`);
                     selectList.setAttribute("multiple", "true");
                     selectList.addEventListener('change', function() {
                         findtable();
@@ -253,23 +245,32 @@ let send = ``;
             }
         
 
-        
-                myObject[language[counter]] = objCells.item(j).querySelector('select').value;
-                    
+            
+            
+        // console.log(values);
+
+            //   let a = objCells.item(j).querySelector('select').toString();
              
+              let a =  getSelectValues(objCells.item(j).querySelector('select'));
+                    
+              myObject[language[counter]] = a.join(", ");
+                  }
+                 
+                // console.log(objCells.item(j).querySelector('option:checked')());
+                //  myObject[language[counter]] = values;
                 //  info.innerHTML = info.innerHTML + ' ' + objCells.item(j).innerHTML;
-            }
+            
         
             
               array.push(myObject);
 console.log(array);
-             
-              
+                }   
+write();
             // info.innerHTML = info.innerHTML + '<br />';     // ADD A BREAK (TAG).
         }
-    write();
+
    
- }
+ 
 
  function write(){
 
@@ -333,4 +334,22 @@ let temp
     
     array = []
    
+  }
+
+
+  
+  
+  function getSelectValues(select) {
+    var result = [];
+    var options = select && select.options;
+    var opt;
+  
+    for (var i=0, iLen=options.length; i<iLen; i++) {
+      opt = options[i];
+  
+      if (opt.selected) {
+        result.push(opt.value || opt.text);
+      }
+    }
+    return result;
   }
