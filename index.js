@@ -34,13 +34,10 @@ function submit_form(){
     state_nb =  document.getElementById('number').value;
   
     create_table();
-    setTimeout(function(){
-        write();
-
-    }, 2000); 
+  
 
     var btn = document.getElementById("submit");
-btn.disabled = true
+    btn.disabled = true
 }
 
 function create_table(){
@@ -182,14 +179,6 @@ else{
         
         }
         
-      
-      
-    
-
-
-
-
-
 
 
 let transition_string 
@@ -199,6 +188,7 @@ let send = ``;
 
 
  function findtable(){
+    array=[]
     states = []
     transition_string=``
       var info =  document.getElementById('demo');
@@ -332,7 +322,7 @@ let temp
     var main = document.getElementById('graph');
     main.innerHTML = image1;		// SVG
     
-    array = []
+   
    
   }
 
@@ -353,3 +343,62 @@ let temp
     }
     return result;
   }
+
+
+  function check_string(){
+
+    let string = document.getElementById('check_string').value;
+    output=document.getElementById('receive')
+    output.innerHTML = ``
+    let digit 
+    let test = 0; 
+    let print = `${array[0].name}`   
+
+
+console.log(`testing string ${string}`);
+
+// for (let i = 0; i < string.length; i++) {  
+
+while(string){
+
+
+     digit = string.charAt(0);
+   
+
+    if(array[test][`${digit}`] ){
+
+    let a = array[test][`${digit}`];
+    print += `--${digit}--> ${array[test][`${digit}`]}  `
+    test = a.charAt(a.length-1) -1 ;
+
+    string =  string.slice(1);
+
+
+  }
+
+  else {
+    print += `--${digit}--> X `
+    break;
+  }
+}
+
+  if(array[test].final && searchStringInArray(digit,language) !== -1){
+    console.log(`ACCEPTED`);
+    document.getElementById('receive').innerHTML += 'ACCEPTED <br>';
+}
+else {
+    console.log(` NOT ACCEPTED`);
+    document.getElementById('receive').innerHTML += 'REJECTED <br>';
+}
+
+document.getElementById('receive').innerHTML += `` + print;
+  
+}
+
+
+  function searchStringInArray (str, strArray) {
+    for (var j=0; j<strArray.length; j++) {
+        if (strArray[j].match(str)) return j;
+    }
+    return -1;
+}
