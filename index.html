@@ -19,44 +19,40 @@
     <title>Document</title>
     
 </head>
-<body onload="loader()">
+<body onload="loader()" >
 
-
-
-    <button onclick="findtable()" value="ok">Button</button>
+    <button onclick="findtable()" value="ok">Force Draw</button>
 
 <table align="center">
     <tr>
         <th>Language</th>
         <th>Number of states</th>
-        <th></th><th></th>
+      
     </tr>
 
     <tr>
-        <form id="form" name="form">
+    <form id="form" name="form">
        <td><input type="text" id="language" name="language" value="0-1" onkeypress="return /[a-z 0-9 -]/i.test(event.key)" placeholder="seperated by - " required></td>
        <td> <input type="number" id="number" name="number" value="2" min="1" onkeypress="return /[0-9]/i.test(event.key)" required></td>
 
        <td><button class="btn" id="submit" onclick ="submit_form()">Submit</button></td>
        <td><input class="btn" id="reset" type="reset" onclick="delete_table()"></td>
-      
+    </form>
     
     </tr>
 
-    <tr>
-        <!-- <td><input type="text" id="language" name="language" value="0-1" onkeypress="return /[a-z 0-9 -]/i.test(event.key)" placeholder="seperated by - " required></td>
-        <td> <input type="number" id="number" name="number" value="2" min="1" onkeypress="return /[0-9]/i.test(event.key)" required></td> -->
-    </form>
-    </tr>
 </table>
+
 <br> <br> <br>
+
 <center>
 
-<div id="in_table">
-    <!-- <table id="table" border="1"></table> -->
-</div>
+    <!-- empty div that will contain NFA transition table -->
+<div id="in_table"> </div>
+ 
 
-<div id="graph"></div>
+<!-- empty div that will contain NFA image -->
+<div id="graph"> </div>
 
    
 
@@ -66,6 +62,11 @@
         <button id="check_btn" class="btn" onclick="check_string()" value="check">Check</button>
         <p id="receive"></p>
         <!-- </form> -->
-    </center>
+
+
+        <button onclick="convertDFA()">TEST</button>
+
+</center>
+
 </body>
-</html>     
+</html>

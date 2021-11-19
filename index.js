@@ -1,4 +1,5 @@
 let array = []
+let dfa = []
 let language = []
 let state_nb 
 let states = []
@@ -188,6 +189,7 @@ let send = ``;
 
 
  function findtable(){
+  console.log("NEW Transition");
     array=[]
     states = []
     transition_string=``
@@ -263,7 +265,7 @@ write();
  
 
  function write(){
-
+ 
 let temp
  array.forEach(function(item){
     transition_string += `${item.name} [shape=circle];`
@@ -294,7 +296,7 @@ let temp
             // temp = `${array[i].x}`
 
             transition_string += ` ${name} -> ${array[i][x]} [label=${x}];`
-            console.log(transition_string);
+            // console.log(transition_string);
         }
         // else{
         //     transition_string += `${name}`
@@ -328,7 +330,7 @@ let temp
 
 
   
-  
+  //get values from select multiple
   function getSelectValues(select) {
     var result = [];
     var options = select && select.options;
@@ -344,7 +346,7 @@ let temp
     return result;
   }
 
-
+//check if string is accepted by designed machine
   function check_string(){
 
     let string = document.getElementById('check_string').value;
@@ -355,9 +357,7 @@ let temp
     let print = `${array[0].name}`   
 
 
-console.log(`testing string ${string}`);
-
-// for (let i = 0; i < string.length; i++) {  
+console.log(`testing string ${string}`); 
 
 while(string){
 
@@ -401,4 +401,195 @@ document.getElementById('receive').innerHTML += `` + print;
         if (strArray[j].match(str)) return j;
     }
     return -1;
+}
+
+
+function convertDFA() {
+  
+  let trap = false
+dfa = []
+let done = []
+let added = []
+ let myObject = {}
+console.log(array);
+
+
+
+myObject[`name`] = array[0][`name`];
+myObject[`final`] = array[0][`final`];
+
+
+
+
+
+  language.map(x=>{
+
+
+    if(array[0][x]){
+
+    //remove space
+      array[0][x] = array[0][x].replace(/\s/g, '');
+
+      myObject[x]=array[0][x]
+      added.push(array[0][x])
+      
+    }
+    //if empty
+    else{
+      trap = true
+      myObject[x]=`TRAP`
+
+    }
+  
+   
+})
+added.push(array[0][`name`])
+done.push("Q1")
+
+//remove duplicated states
+added = uniq_fast(added)
+
+
+dfa.push(myObject);
+
+
+var count = 0;
+ while(!compare_array(added,done)){
+  count++;
+
+  console.log(`added: `)
+console.log(added);
+
+   var temp = added[count]
+   console.log(`temp: `)
+   console.log(temp);
+
+   //remove comma from name since it is not compatible with Viz
+   var name = added[count].replace(",", "");
+  //  console.log(`name: `+name)
+
+  //extract number from state name to reach it in array
+   var number = name.replace( /^\D+/g, '');
+  //  console.log(`number: `+number)
+
+    myObject = {}
+    myObject[`name`]=name;
+
+
+
+if(temp.length=1){
+
+
+  language.map(x=>{
+
+     if(array[number-1][x]){
+      myObject[x]=  array[number-1][x];
+      added.push(array[number-1][x])
+     }
+
+   else{
+    trap = true
+    myObject[x]=`TRAP`
+   }
+
+   myObject[`final`]=array[number-1][`final`]
+    
+    added = uniq_fast(added)
+  })
+
+
+
+}
+else if (temp.length>1){
+
+}
+done.push(name);
+dfa.push(myObject);
+
+ }
+
+
+
+
+//add deadstate (TRAP) if needed 
+if (trap) {
+  let myObject = {}
+  myObject[`name`]=`TRAP`
+  myObject[`final`]=false
+
+
+  language.map(x=>{
+
+    myObject[x]=myObject[`name`]
+
+  })
+  dfa.push(myObject);
+ 
+}
+
+// console.log(`added: `+added)
+// console.log(`done: `+done)
+console.log(`dfa: `)
+console.log(dfa)
+
+ 
+}
+
+function temp() {
+ 
+  // console.log(union([a][b])); 
+}
+
+function union(){
+
+var string1 = `q1, q2`;
+var string2 = `q1`;
+
+//add strings
+let add = string1 + `, `+string2;
+
+//split strings to array
+const myArray = add.split(", ");
+
+// console.log(myArray)
+
+
+let unique = uniq_fast(myArray);
+
+let final = unique.join(",")
+// console.log(final)
+}
+
+
+
+
+
+function uniq_fast(a) {
+  var seen = {};
+  var out = [];
+  var len = a.length;
+  var j = 0;
+  for(var i = 0; i < len; i++) {
+       var item = a[i];
+       if(seen[item] !== 1) {
+             seen[item] = 1;
+             out[j++] = item;
+       }
+  }
+  return out;
+}
+
+
+function compare_array(array1,array2) {
+
+ 
+  if(array1.sort().join(',')=== array2.sort().join(',')){
+   
+   return true;
+}
+else{
+   return false;
+}
+
+
 }
