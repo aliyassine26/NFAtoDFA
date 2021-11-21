@@ -1,4 +1,8 @@
-let array = []
+let array = [
+
+  
+
+]
 let dfa = []
 let language = []
 let state_nb 
@@ -257,17 +261,17 @@ let send = ``;
               array.push(myObject);
 console.log(array);
                 }   
-write();
+write(array);
             // info.innerHTML = info.innerHTML + '<br />';     // ADD A BREAK (TAG).
         }
 
    
  
 
- function write(){
- 
+ function write(objects){
+  transition_string = ``
 let temp
- array.forEach(function(item){
+objects.forEach(function(item){
     transition_string += `${item.name} [shape=circle];`
    
   })
@@ -275,11 +279,11 @@ let temp
 
 //  var name = array[i].name;
 // transition_string += `${name} [shape=circle];`
- for(var i=0; i<array.length; i++){
+ for(var i=0; i<objects.length; i++){
 
    
-    var name = array[i].name;
-   if(array[i].final == true){
+    var name = objects[i].name;
+   if(objects[i].final == true){
     transition_string += `${name} [shape=doublecircle]`
    }
    else{
@@ -289,13 +293,13 @@ let temp
     language.map(x=>{
         // transition_string += `${name} [shape=circle];`
 
-        if(array[i][x]){
+        if(objects[i][x]){
 
 
             // if(array[i].value == array[i][x+1] )
             // temp = `${array[i].x}`
 
-            transition_string += ` ${name} -> ${array[i][x]} [label=${x}];`
+            transition_string += ` ${name} -> ${objects[i][x]} [label=${x}];`
             // console.log(transition_string);
         }
         // else{
@@ -309,25 +313,38 @@ let temp
 	size="8,5"
     init [label="", shape=point]
     node [shape = doublecircle]; 
-    init -> ${array[0].name} [style="solid"]
+    init -> ${objects[0].name} [style="solid"]
 	node [shape = circle];  ${transition_string}} `
  
-   draw(send);
+if (objects == array) {
+  draw_nfa(send);
+}
+else{
+  draw_dfa(send);
+}
+ 
 
 
 
 
  }
  
- function draw(input) {
+ function draw_nfa(input) {
     var image1  = Viz(input, 'svg');
     var main = document.getElementById('graph');
     main.innerHTML = image1;		// SVG
-    
+    convertDFA();
    
    
   }
-
+  function draw_dfa(input) {
+    var image2  = Viz(input, 'svg');
+    var main = document.getElementById('graph2');
+    main.innerHTML = image2;		// SVG
+  
+   
+   
+  }
 
   
   //get values from select multiple
@@ -460,9 +477,15 @@ var count = 0;
   console.log(`added: `)
 console.log(added);
 
-   var temp = added[count]
-   console.log(`temp: `)
-   console.log(temp);
+/*ERROR */
+console.log(`added[count] ` + added[count] );
+   var test = added[count].split(',');
+
+   
+   console.log(`test length ` + test.length );
+   console.log(`test: `)
+   console.log(test);
+/*END ERROR */
 
    //remove comma from name since it is not compatible with Viz
    var name = added[count].replace(",", "");
@@ -477,7 +500,7 @@ console.log(added);
 
 
 
-if(temp.length=1){
+if(test.length==1){
 
 
   language.map(x=>{
@@ -497,20 +520,37 @@ if(temp.length=1){
     added = uniq_fast(added)
   })
 
-
-
-}
-else if (temp.length>1){
+  done.push(name);
+  dfa.push(myObject);
 
 }
-done.push(name);
-dfa.push(myObject);
+////////////////////////////////////////////////////////////////////////////////
+else if (test.length>1){
+ 
+ 
+ 
+  language.map(x=>{
+  
+    // let string = '';
 
+    test.forEach(element => {  
+
+      var nb = test[element]['name'].replace( /^\D+/g, '');
+
+      // if (array[nb][x]) 
+        
+      
+      myObject[x]+=  array[nb-1][x];
+      myObject[`final`]=false
+    });
+
+    added.push(array[nb-1][x])
+  });
+  done.push(name);
+  dfa.push(myObject);
+}
  }
-
-
-
-
+////////////////////////////////////////////////////////////////////////
 //add deadstate (TRAP) if needed 
 if (trap) {
   let myObject = {}
@@ -532,13 +572,10 @@ if (trap) {
 console.log(`dfa: `)
 console.log(dfa)
 
- 
+write(dfa);
 }
 
-function temp() {
- 
-  // console.log(union([a][b])); 
-}
+
 
 function union(){
 
@@ -593,3 +630,5 @@ else{
 
 
 }
+
+
