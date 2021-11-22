@@ -428,7 +428,7 @@ dfa = []
 let done = []
 let added = []
  let myObject = {}
-console.log(array);
+// console.log(array);
 
 
 
@@ -476,7 +476,8 @@ var count = 0;
 
   console.log(`added: `)
 console.log(added);
-
+console.log(`done: `)
+console.log(done);
 /*ERROR */
 console.log(`added[count] ` + added[count] );
    var test = added[count].split(',');
@@ -488,7 +489,7 @@ console.log(`added[count] ` + added[count] );
 /*END ERROR */
 
    //remove comma from name since it is not compatible with Viz
-   var name = added[count].replace(",", "");
+   var name = added[count].replace("", "");
   //  console.log(`name: `+name)
 
   //extract number from state name to reach it in array
@@ -523,29 +524,57 @@ if(test.length==1){
   done.push(name);
   dfa.push(myObject);
 
+
+
+
 }
 ////////////////////////////////////////////////////////////////////////////////
 else if (test.length>1){
  
- 
- 
+  let check_final = false
+  let temp_string 
   language.map(x=>{
-  
     // let string = '';
-
+    var nb
+     temp_string = ``;
+    let temp_array = []
     test.forEach(element => {  
 
-      var nb = test[element]['name'].replace( /^\D+/g, '');
 
-      // if (array[nb][x]) 
-        
+       nb = element.replace( /^\D+/g, '');
+       nb--;
+      console.log(nb); 
+
+      if (array[nb][x] ) {
+
+        temp_string+=  array[nb][x] + `,`
+        if (array[nb][`final`]==true) {
+          check_final = true;
+        }
       
-      myObject[x]+=  array[nb-1][x];
-      myObject[`final`]=false
-    });
+      }
 
-    added.push(array[nb-1][x])
+    });
+    //remove , from the end
+    temp_string=temp_string.replace(/,$/,"");
+
+    
+    temp_array =  temp_string.split(",")
+    temp_array.sort();
+    temp_array = uniq_fast(temp_array)
+    temp_string = temp_array.join(" , ");
+    
+    myObject[x]=temp_string;
+    console.log(temp_string);
+    temp_string = temp_string.replace(/\s/g, '');
+ 
+    if (temp_string != '') {
+      added.push(temp_string)
+    }
+    
+    added = uniq_fast(added)
   });
+  myObject[`final`]=check_final;
   done.push(name);
   dfa.push(myObject);
 }
@@ -567,34 +596,14 @@ if (trap) {
  
 }
 
-// console.log(`added: `+added)
-// console.log(`done: `+done)
+console.log(`added: `+added)
+console.log(`done: `+done)
 console.log(`dfa: `)
 console.log(dfa)
 
+fix_dfa();
+console.log(dfa);
 write(dfa);
-}
-
-
-
-function union(){
-
-var string1 = `q1, q2`;
-var string2 = `q1`;
-
-//add strings
-let add = string1 + `, `+string2;
-
-//split strings to array
-const myArray = add.split(", ");
-
-// console.log(myArray)
-
-
-let unique = uniq_fast(myArray);
-
-let final = unique.join(",")
-// console.log(final)
 }
 
 
@@ -631,4 +640,17 @@ else{
 
 }
 
+//remove all spaces and commas
+function fix_dfa() {
+  
 
+  for (let i = 0; i < dfa.length; i++) {
+    dfa[i][`name`]= dfa[i][`name`].replaceAll(',', '').replace(/ /g,'')
+    language.map(x=>{
+    dfa[i][x]= dfa[i][x].replaceAll(',', '').replace(/ /g,'')
+
+    })
+  
+}
+
+}
