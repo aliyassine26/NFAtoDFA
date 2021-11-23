@@ -473,7 +473,7 @@ dfa.push(myObject);
 var count = 0;
  while(!compare_array(added,done)){
   count++;
-
+  done = uniq_fast(done);
   console.log(`added: `)
 console.log(added);
 console.log(`done: `)
@@ -532,7 +532,7 @@ if(test.length==1){
 else if (test.length>1){
  
   let check_final = false
-  let temp_string 
+  let temp_string = ``
   language.map(x=>{
     // let string = '';
     var nb
@@ -545,24 +545,28 @@ else if (test.length>1){
        nb--;
       console.log(nb); 
 
+      if (array[nb][`final`]==true) {
+        check_final = true;
+      }
+
       if (array[nb][x] ) {
 
         temp_string+=  array[nb][x] + `,`
-        if (array[nb][`final`]==true) {
-          check_final = true;
-        }
+       
       
       }
 
     });
     //remove , from the end
-    temp_string=temp_string.replace(/,$/,"");
-
-    
+    temp_string=temp_string.replace(/,$/,"").replace(/ /g,'');
+  
     temp_array =  temp_string.split(",")
-    temp_array.sort();
+   
+    temp_array=temp_array.sort();
     temp_array = uniq_fast(temp_array)
-    temp_string = temp_array.join(" , ");
+    console.log(`temp_array`);
+    console.log(temp_array);
+    temp_string = temp_array.join(",");
     
     myObject[x]=temp_string;
     console.log(temp_string);
@@ -574,8 +578,9 @@ else if (test.length>1){
     
     added = uniq_fast(added)
   });
-  myObject[`final`]=check_final;
+  myObject['final']=check_final;
   done.push(name);
+  done = uniq_fast(done);
   dfa.push(myObject);
 }
  }
@@ -600,7 +605,7 @@ console.log(`added: `+added)
 console.log(`done: `+done)
 console.log(`dfa: `)
 console.log(dfa)
-
+done = uniq_fast(done);
 fix_dfa();
 console.log(dfa);
 write(dfa);
@@ -627,8 +632,10 @@ function uniq_fast(a) {
 
 
 function compare_array(array1,array2) {
-
- 
+  uniq_fast(array1)
+  for (let i = 0; i < array1.length; i++) {
+    array1[i]= array1[i].replace(/ /g,'')
+  }
   if(array1.sort().join(',')=== array2.sort().join(',')){
    
    return true;
