@@ -1,13 +1,9 @@
-let array = [
-
-  
-
-]
+let array = []
 let dfa = []
 let language = []
 let state_nb 
 let states = []
-
+let output_format = `svg`;
 
 
 function delete_table() {
@@ -20,7 +16,15 @@ parentEl.removeChild(removeTab);
 var btn = document.getElementById("submit");
 btn.disabled = false
 
+document.getElementById("accordion").disabled = true;
+
 states = []
+let send = ''
+
+draw_nfa(send);
+draw_dfa(send);
+
+
 }
 
 function loader(){
@@ -28,6 +32,8 @@ function loader(){
 var form = document.getElementById("form");
 function handleForm(event) { event.preventDefault(); } 
 form.addEventListener('submit', handleForm);
+
+document.getElementById("accordion").disabled = true;
 }
 
 
@@ -40,6 +46,7 @@ function submit_form(){
   
     create_table();
   
+    document.getElementById("accordion").disabled = false;
 
     var btn = document.getElementById("submit");
     btn.disabled = true
@@ -144,7 +151,8 @@ else{
                     var selectList = document.createElement("select");
                    
                     selectList.setAttribute("class", "mySelect");
-                    selectList.setAttribute("id", `check${i}${j}`);
+                    // selectList.setAttribute("id", `check${i}${j}`);
+                    selectList.setAttribute("id", `myMulti`);
                     selectList.setAttribute("multiple", "true");
                     selectList.addEventListener('change', function() {
                         findtable();
@@ -330,20 +338,58 @@ else{
  }
  
  function draw_nfa(input) {
+
+  if (output_format == `svg`) {
+   // SVG
     var image1  = Viz(input, 'svg');
     var main = document.getElementById('graph');
-    main.innerHTML = image1;		// SVG
+    main.innerHTML = image1;		
+  }
+  else{
+    //png
+    parent = document.getElementById('graph')
+    while (parent.firstChild) {
+      parent.removeChild(parent.firstChild);
+  }
+    let imgelement1 = Viz(input, { format: "png-image-element"});
+     parent.appendChild(imgelement1); 
+    
+    
+  }
+
+
     convertDFA();
    
+
    
   }
+
+
   function draw_dfa(input) {
+
+
+    if (output_format == `svg`) {
+        // SVG
     var image2  = Viz(input, 'svg');
     var main = document.getElementById('graph2');
-    main.innerHTML = image2;		// SVG
+    main.innerHTML = image2;	
+    }
+
+    else{
+        //png
+        parent = document.getElementById('graph2')
+        while (parent.firstChild) {
+          parent.removeChild(parent.firstChild);
+      }
+
+        let imgelement2 = Viz(input, { format: "png-image-element"});
+parent.appendChild(imgelement2); 
+    
+    }
+	
   
    
-   
+
   }
 
   
@@ -371,8 +417,9 @@ else{
     output.innerHTML = ``
     let digit 
     let test = 0; 
+    let trap = false
     let print = `${dfa[0].name}`   
-
+    //let draw = print
 
 console.log(`testing string ${string}`); 
 
@@ -381,8 +428,15 @@ while(string){
 
      digit = string.charAt(0);
    
+     if(dfa[test][`${digit}`] == `TRAP` ){
+       trap = true
+      print += `--${digit}--> TRAP `
+     // draw += ` -> TRAP [label=${digit}];`
+      break;
 
-    if(dfa[test][`${digit}`] ){
+     }
+
+    else if(dfa[test][`${digit}`] ){
 
     let a = dfa[test][`${digit}`];
     print += `--${digit}--> ${dfa[test][`${digit}`]}  `
@@ -390,26 +444,42 @@ while(string){
 
     string =  string.slice(1);
 
+//draw += ` -> `+dfa[test][`name`]+` [label=${digit}]; `
+
+// if (string.charAt(0)) {
+//   draw +=dfa[test][`name`]
+// }
 
   }
 
   else {
     print += `--${digit}--> X `
+    //draw += ` -> X [label=${digit}];`
+
     break;
   }
 }
+receive = document.getElementById('receive')
 
-  if(dfa[test].final && searchStringInArray(digit,language) !== -1){
+if(trap){
+  console.log(` NOT ACCEPTED`);
+  receive.style.backgroundColor  = "red";
+  receive.innerHTML += 'REJECTED <br>';
+  
+}
+  else if(dfa[test].final && searchStringInArray(digit,language) !== -1){
     console.log(`ACCEPTED`);
-    document.getElementById('receive').innerHTML += 'ACCEPTED <br>';
+    receive.style.backgroundColor  = "#008CBA";
+    receive.innerHTML += 'ACCEPTED <br>';
 }
 else {
     console.log(` NOT ACCEPTED`);
-    document.getElementById('receive').innerHTML += 'REJECTED <br>';
+    receive.style.backgroundColor  = "red";
+    receive.innerHTML += 'REJECTED <br>';
 }
 
-document.getElementById('receive').innerHTML += `` + print;
-  
+receive.innerHTML += `` + print;
+// console.log(draw);
 }
 
 
@@ -420,7 +490,11 @@ document.getElementById('receive').innerHTML += `` + print;
     return -1;
 }
 
-
+//reset check string
+function reset_string() {
+  let string = document.getElementById('check_string').value='';
+  document.getElementById('receive').innerHTML = ''
+} 
 function convertDFA() {
   
   let trap = false
@@ -474,18 +548,19 @@ var count = 0;
  while(!compare_array(added,done)){
   count++;
   done = uniq_fast(done);
-  console.log(`added: `)
-console.log(added);
-console.log(`done: `)
-console.log(done);
+//   console.log(`added: `)
+// console.log(added);
+// console.log(`done: `)
+// console.log(done);
 /*ERROR */
 console.log(`added[count] ` + added[count] );
    var test = added[count].split(',');
 
    
-   console.log(`test length ` + test.length );
-   console.log(`test: `)
-   console.log(test);
+  //  console.log(`test length ` + test.length );
+  //  console.log(`test: `)
+  //  console.log(test);
+
 /*END ERROR */
 
    //remove comma from name since it is not compatible with Viz
@@ -543,7 +618,7 @@ else if (test.length>1){
 
        nb = element.replace( /^\D+/g, '');
        nb--;
-      console.log(nb); 
+      // console.log(nb); 
 
       if (array[nb][`final`]==true) {
         check_final = true;
@@ -564,12 +639,12 @@ else if (test.length>1){
    
     temp_array=temp_array.sort();
     temp_array = uniq_fast(temp_array)
-    console.log(`temp_array`);
-    console.log(temp_array);
+    // console.log(`temp_array`);
+    // console.log(temp_array);
     temp_string = temp_array.join(",");
     
     myObject[x]=temp_string;
-    console.log(temp_string);
+    // console.log(temp_string);
     temp_string = temp_string.replace(/\s/g, '');
  
     if (temp_string != '') {
@@ -601,13 +676,12 @@ if (trap) {
  
 }
 
-console.log(`added: `+added)
-console.log(`done: `+done)
+// console.log(`added: `+added)
+// console.log(`done: `+done)
 console.log(`dfa: `)
 console.log(dfa)
 done = uniq_fast(done);
 fix_dfa();
-console.log(dfa);
 write(dfa);
 }
 
@@ -661,3 +735,4 @@ function fix_dfa() {
 }
 
 }
+

@@ -1,6 +1,7 @@
 body{
   width:100% ;
- 
+  font-family: sans-serif;
+
 }
 #buttons{
 
@@ -44,7 +45,8 @@ body{
   table {
     
 align-content: center;
-    width: 500px;
+    /* width: 500px; */
+    width: 50%;
   }
 
 
@@ -232,6 +234,12 @@ background-color: #008CBA;
 .panel {
   padding: 0 18px;
   display: none;
-  background-color: white;
+  background-color:white; 
   overflow: hidden;
+}
+#receive{
+
+width: max-content;
+
+
 }

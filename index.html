@@ -8,14 +8,13 @@
 <script src=https://unpkg.com/viz.js@1.8.0/viz.js></script>
 <script src=https://unpkg.com/d3-graphviz@1.5.0/build/d3-graphviz.min.js></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<script>
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Raleway'>
+<link rel='stylesheet' href='https://fonts.googleapis.com/icon?family=Material+Icons'>
 
-     
-      
-
-</script>
     <script src="index.js"></script>
+    <script src="select/script.js"></script>
     <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="select/style.css">
     <title>Document</title>
     
     
@@ -41,6 +40,8 @@
     
     </tr>
 
+
+
 </table>
 <div id="buttons">
 <button class="btn" id="submit" onclick ="submit_form()">Submit</button></td>
@@ -56,23 +57,23 @@
  
 
 <!-- empty div that will contain NFA image -->
-<div class="container">
+<div class="container1">
 <h1>NFA</h1>
 </div>
 <div id="graph"> </div>
 
-<div class="container">
+<div class="container1">
 <h1>DFA</h1>
 <div id="graph2"> </div>
 </div>
-<button class="accordion">Check String</button>
+<button class="accordion" id="accordion">Check String</button>
 <div class="panel">
-    <p id="demo"></p>
-    <!-- <form id="form_check" name="form_check"> -->
+  
         <input type="text" id="check_string" name="check_string" required>
-        <button id="check_btn" class="btn" onclick="check_string()" value="check">Check</button>
+        <button id="submit" class="btn" onclick="check_string()" value="check">Check</button>
+        <button id="reset" class="btn" onclick="reset_string()" value="check">Clear</button>
         <p id="receive"></p>
-        <!-- </form> -->
+    
 
     </div>
         <!-- <button onclick="convertDFA()">TEST</button> -->
@@ -98,6 +99,7 @@ for (i = 0; i < acc.length; i++) {
   });
 }
 </script>
+
 
 </body>
 </html>     
