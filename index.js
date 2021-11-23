@@ -371,7 +371,7 @@ else{
     output.innerHTML = ``
     let digit 
     let test = 0; 
-    let print = `${array[0].name}`   
+    let print = `${dfa[0].name}`   
 
 
 console.log(`testing string ${string}`); 
@@ -382,10 +382,10 @@ while(string){
      digit = string.charAt(0);
    
 
-    if(array[test][`${digit}`] ){
+    if(dfa[test][`${digit}`] ){
 
-    let a = array[test][`${digit}`];
-    print += `--${digit}--> ${array[test][`${digit}`]}  `
+    let a = dfa[test][`${digit}`];
+    print += `--${digit}--> ${dfa[test][`${digit}`]}  `
     test = a.charAt(a.length-1) -1 ;
 
     string =  string.slice(1);
@@ -399,7 +399,7 @@ while(string){
   }
 }
 
-  if(array[test].final && searchStringInArray(digit,language) !== -1){
+  if(dfa[test].final && searchStringInArray(digit,language) !== -1){
     console.log(`ACCEPTED`);
     document.getElementById('receive').innerHTML += 'ACCEPTED <br>';
 }
