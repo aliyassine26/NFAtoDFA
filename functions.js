@@ -1,5 +1,5 @@
 
-
+//remove duplicated elements from array
 function uniq_fast(a) {
     var seen = {};
     var out = [];
@@ -15,7 +15,7 @@ function uniq_fast(a) {
     return out;
   }
   
-  
+  //compare 2 arrays
   function compare_array(array1, array2) {
     uniq_fast(array1)
     for (let i = 0; i < array1.length; i++) {
@@ -32,19 +32,14 @@ function uniq_fast(a) {
   
   }
   
-  //remove all spaces and commas
+  //remove all spaces and commas from DFA to be compatible with VIZ
   function fix_dfa() {
-  
-  
     for (let i = 0; i < dfa.length; i++) {
       dfa[i][`name`] = dfa[i][`name`].replaceAll(',', '').replace(/ /g, '')
       language.map(x => {
         dfa[i][x] = dfa[i][x].replaceAll(',', '').replace(/ /g, '')
-  
       })
-  
     }
-  
   }
   
 //reset check string
@@ -53,6 +48,7 @@ function reset_string() {
     document.getElementById('receive').innerHTML = ''
   }
   
+  //search for specific element in array
   function searchStringInArray(str, strArray) {
     for (var j = 0; j < strArray.length; j++) {
       if (strArray[j].match(str)) return j;
@@ -76,19 +72,36 @@ function getSelectValues(select) {
     return result;
   }
 
-  function remove(value,arr) {
-    
-    const index = arr.indexOf(`Q1`);
-    if (index > -1) {
-      arr.splice(index, 1);
-    }
-    
-  }
-// added
-// done
+//store difference between array1 and array2 in array3
   function diff() {
-   
 difference = added.filter(function(val) {
   return done.indexOf(val) == -1;
 });
   }
+
+//remove table on reset
+  function delete_table() {
+    var removeTab = document.getElementById('table');
+  
+    var parentEl = removeTab.parentElement;
+    parentEl.removeChild(removeTab);
+  
+    var btn = document.getElementById("submit");
+    btn.disabled = false
+  
+    document.getElementById("accordion").disabled = true;
+  
+    states = []
+    let send = ''
+    $(".radio").hide();
+    draw_nfa(send);
+    draw_dfa(send);
+  
+  }
+ 
+  
+  //get output format from radio buttons
+function radio_value() {
+  output_format = document.querySelector('input[name="switch-one"]:checked').value;
+  findtable()
+}
