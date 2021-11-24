@@ -1,4 +1,32 @@
-#language, #number {
+body{
+  width:100% ;
+  font-family: sans-serif;
+
+}
+#buttons{
+
+  margin: auto;
+  width: 50%;
+ 
+  padding: 10px;
+  text-align: center;
+
+}
+
+#in_table{
+  overflow-x:auto;
+}
+
+#input{
+  margin: auto;
+  width: 50%;
+ 
+  padding: 10px;
+  text-align: center;
+
+}
+
+#language, #number, #check_string {
     width: 100%;
     /* padding: 12px 20px; */
     padding: 5px 20px;
@@ -10,13 +38,15 @@
     outline: none;
   }
   
-  #language:focus, #number:focus{
+  #language:focus, #number:focus #check_string:focus{
     border: 3px solid #555;
   }
 
   table {
+    
 align-content: center;
-    width: 500px;
+    /* width: 500px; */
+    width: 50%;
   }
 
 
@@ -35,8 +65,12 @@ align-content: center;
     padding: 5px 20px;
     margin: 8px 0;
   }
+  #check_string {
 
-  #submit {
+    width: 150px;
+     height: 35px; 
+  }
+  #submit, #check_btn {
     border-color: lightblue;
     background-color: white; 
     color: black; 
@@ -108,6 +142,17 @@ table .first{
 text-align: center;
 
 
+
+
+}
+table .lang{
+  color: white;
+  background-color: #008CBA;
+text-align: center;
+width: 9000px;
+
+
+
 }
 
 table .statename {
@@ -138,5 +183,63 @@ table .state_cell {
   
   background-color: lightgray;
 text-align: center;
+
+}
+
+#check_final
+{
+
+
+  width: 10px;
+  height: 10px;
+}
+
+
+table .mySelect{
+ 
+  
+text-align: center;
+width: 100px;
+
+
+
+}
+
+h1{
+
+color: white;
+background-color: #008CBA;
+
+}
+
+.accordion {
+  background-color: #ccc; 
+  
+  color: #008CBA;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: center;
+  outline: none;
+  font-size: 32px;
+  transition: 0.4s;
+}
+
+.active, .accordion:hover {
+  background-color: #008CBA; 
+  color: white;
+}
+
+.panel {
+  padding: 0 18px;
+  display: none;
+  background-color:white; 
+  overflow: hidden;
+}
+#receive{
+
+width: max-content;
+
 
 }
