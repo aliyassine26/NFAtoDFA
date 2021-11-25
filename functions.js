@@ -45,7 +45,10 @@ function uniq_fast(a) {
 //reset check string
 function reset_string() {
     let string = document.getElementById('check_string').value = '';
-    document.getElementById('receive').innerHTML = ''
+    document.getElementById('output').innerHTML = 'Output displayed here'
+
+    
+
   }
   
   //search for specific element in array
@@ -104,4 +107,9 @@ difference = added.filter(function(val) {
 function radio_value() {
   output_format = document.querySelector('input[name="switch-one"]:checked').value;
   findtable()
+}
+
+function atLeastOneCheckboxIsChecked(){
+  const checkboxes = Array.from(document.querySelectorAll(".checkbox"));
+  return checkboxes.reduce((acc, curr) => acc || curr.checked, false);
 }

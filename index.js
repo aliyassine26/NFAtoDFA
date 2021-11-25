@@ -106,7 +106,10 @@ function create_table() {
           const input = document.createElement("input");
           input.setAttribute("type", "checkbox");
           input.setAttribute("class", "checkbox");
-
+          if (i==1) {
+            input.setAttribute("checked", "checked");
+          }
+          
           input.setAttribute("onclick", "findtable()");
           td.appendChild(input);
 
@@ -209,6 +212,12 @@ function findtable() {
 }
 
 function write(objects) {
+
+
+if (!atLeastOneCheckboxIsChecked()) {
+  alert("Final state required")
+  return;
+} 
   transition_string = ``
   let temp
   objects.forEach(function (item) {
@@ -243,7 +252,6 @@ function write(objects) {
     node [shape = doublecircle]; 
     init -> ${objects[0].name} [style="solid"]
 	node [shape = circle];  ${transition_string}} `
-
   if (objects == nfa) {
     draw_nfa(send);
   }
@@ -266,6 +274,8 @@ function draw_nfa(input) {
       parent.removeChild(parent.firstChild);
     }
     let imgelement1 = Viz(input, { format: "png-image-element" });
+  
+   
     parent.appendChild(imgelement1);
   }
   convertDFA();
@@ -288,6 +298,7 @@ function draw_dfa(input) {
       parent.removeChild(parent.firstChild);
     }
     let imgelement2 = Viz(input, { format: "png-image-element" });
+   
     parent.appendChild(imgelement2);
   }
 }
@@ -297,6 +308,7 @@ function check_string() {
 
   let string = document.getElementById('check_string').value;
   output = document.getElementById('receive')
+  output2 = output = document.getElementById('output')
   output.innerHTML = ``
   let digit
   let test = 0;
@@ -328,21 +340,24 @@ function check_string() {
     }
   }
   receive = document.getElementById('receive')
-
+ 
   if (trap) {
-    receive.style.backgroundColor = "red";
-    receive.innerHTML += 'REJECTED <br>';
+    
+    output2.innerHTML = '✘ REJECTED: ';
+  
   }
 
   else if (dfa[test].final && searchStringInArray(digit, language) !== -1) {
-    receive.style.backgroundColor = "#008CBA";
-    receive.innerHTML += 'ACCEPTED <br>';
+ 
+    output2.innerHTML = '✔ ACCEPTED: ';
+   
   }
   else {
-    receive.style.backgroundColor = "red";
-    receive.innerHTML += 'REJECTED <br>';
+   
+    output2.innerHTML = '✘ REJECTED: ';
+   
   }
-  receive.innerHTML += `` + print;
+  output2.innerHTML += `` + print;
 }
 
 function convertDFA() {
