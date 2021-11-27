@@ -1,3 +1,6 @@
+
+
+
 let nfa = []
 let dfa = []
 let done = []
@@ -15,6 +18,7 @@ function loader() {
   form.addEventListener('submit', handleForm);
   document.getElementById("accordion").disabled = true;
   radio_value()
+  snackbar(false)
 
 }
 
@@ -33,6 +37,16 @@ function submit_form() {
   var btn = document.getElementById("submit");
   btn.disabled = true
   $(".radio").show();
+  
+  //fill 'enter string' with random number
+  let string = ``
+  for (let i = 0; i < states.length+1; i++) {
+    var item = language[Math.floor(Math.random() * language.length)];
+    string += item
+  }
+
+  var enter = document.getElementById("check_string").placeholder = `Ex: `+string;
+  
 }
 
 function create_table() {
@@ -171,7 +185,7 @@ function findtable() {
   var table = document.getElementById('table');
 
   // LOOP THROUGH EACH ROW OF THE TABLE AFTER HEADER.
-  for (i = 1; i < table.rows.length; i++) {
+  for (i = 1; i < table?.rows.length; i++) {
 
     // GET THE CELLS COLLECTION OF THE CURRENT ROW.
     var objCells = table.rows.item(i).cells;
@@ -207,17 +221,22 @@ function findtable() {
 
     nfa.push(myObject);
   }
+
   write(nfa);
-  
+
 }
 
 function write(objects) {
 
 
 if (!atLeastOneCheckboxIsChecked()) {
-  alert("Final state required")
+  snackbar(true)
   return;
 } 
+else{
+  snackbar(false) 
+}
+
   transition_string = ``
   let temp
   objects.forEach(function (item) {
@@ -238,8 +257,8 @@ if (!atLeastOneCheckboxIsChecked()) {
 
     language.map(x => {
     
-
       if (objects[i][x]) {
+        
         transition_string += ` ${name} -> ${objects[i][x]} [label=${x}];`
       }
   
@@ -274,8 +293,7 @@ function draw_nfa(input) {
       parent.removeChild(parent.firstChild);
     }
     let imgelement1 = Viz(input, { format: "png-image-element" });
-  
-   
+    
     parent.appendChild(imgelement1);
   }
   convertDFA();
@@ -298,7 +316,6 @@ function draw_dfa(input) {
       parent.removeChild(parent.firstChild);
     }
     let imgelement2 = Viz(input, { format: "png-image-element" });
-   
     parent.appendChild(imgelement2);
   }
 }
@@ -317,22 +334,23 @@ function check_string() {
  
   while (string) {
 
-    digit = string.charAt(0);
+   
+  digit = string.charAt(0);
 
-    if (dfa[test][`${digit}`] == `TRAP`) {
-      trap = true
-      print += `--${digit}--> TRAP `
-      break;
-    }
+  if (dfa[test][`${digit}`] == `TRAP`) {
+    trap = true
+    print += `--${digit}--> TRAP `
+    break;
+  }
 
-    else if (dfa[test][`${digit}`]) {
+  else if (dfa[test][`${digit}`]) {
 
-      let a = dfa[test][`${digit}`];
-      print += `--${digit}--> ${dfa[test][`${digit}`]}  `
-      test = a.charAt(a.length - 1) - 1;
-      string = string.slice(1);
+    let a = dfa[test][`${digit}`];
+    print += `--${digit}--> ${dfa[test][`${digit}`]}  `
+    test = dfa.findIndex(x => x.name === a);
+    string = string.slice(1);
 
-    }
+  }
 
     else {
       print += `--${digit}--> X `
@@ -347,7 +365,7 @@ function check_string() {
   
   }
 
-  else if (dfa[test].final && searchStringInArray(digit, language) !== -1) {
+  else if (dfa[test][`final`] && searchStringInArray(digit, language) !== -1) {
  
     output2.innerHTML = '✔ ACCEPTED: ';
    
@@ -519,4 +537,7 @@ function convertDFA() {
   fix_dfa();
   write(dfa);
 }
+
+
+
 

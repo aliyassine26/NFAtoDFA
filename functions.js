@@ -14,6 +14,7 @@ function uniq_fast(a) {
     }
     return out;
   }
+
   
   //compare 2 arrays
   function compare_array(array1, array2) {
@@ -47,8 +48,6 @@ function reset_string() {
     let string = document.getElementById('check_string').value = '';
     document.getElementById('output').innerHTML = 'Output displayed here'
 
-    
-
   }
   
   //search for specific element in array
@@ -77,17 +76,15 @@ function getSelectValues(select) {
 
 //store difference between array1 and array2 in array3
   function diff() {
-difference = added.filter(function(val) {
-  return done.indexOf(val) == -1;
-});
+difference = added.filter((val)=> done.indexOf(val) == -1);
   }
 
 //remove table on reset
   function delete_table() {
-    var removeTab = document.getElementById('table');
-  
-    var parentEl = removeTab.parentElement;
-    parentEl.removeChild(removeTab);
+    const removeTab = document.getElementById('table');
+
+    const parentEl = removeTab?.parentElement;
+    parentEl?.removeChild(removeTab);
   
     var btn = document.getElementById("submit");
     btn.disabled = false
@@ -99,10 +96,11 @@ difference = added.filter(function(val) {
     $(".radio").hide();
     draw_nfa(send);
     draw_dfa(send);
+    snackbar(false)
   
   }
- 
-  
+
+
   //get output format from radio buttons
 function radio_value() {
   output_format = document.querySelector('input[name="switch-one"]:checked').value;
@@ -112,4 +110,17 @@ function radio_value() {
 function atLeastOneCheckboxIsChecked(){
   const checkboxes = Array.from(document.querySelectorAll(".checkbox"));
   return checkboxes.reduce((acc, curr) => acc || curr.checked, false);
+}
+
+function snackbar(bool) {
+  var x = document.getElementById("snackbar");
+  
+  if (bool) {
+    x.classList.add("show");
+  }
+  else{
+    x.classList.remove("show");
+  }
+ 
+
 }
