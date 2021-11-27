@@ -20,6 +20,7 @@ body {
 .topnav .logo {
   background-color: #008cba;
   color: white;
+  font-weight: bolder;
 }
 
 .topnav a:hover {
