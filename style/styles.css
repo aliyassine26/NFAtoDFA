@@ -95,14 +95,10 @@ table {
   color: white;
 }
 
-.transition_input .statename {
-}
-
 #table {
   align-self: center;
   border-collapse: collapse;
   align-content: center;
-
   border-collapse: collapse;
   margin: 25px 0;
   font-size: 0.9em;
@@ -120,6 +116,7 @@ table {
 #table th,
 #table td {
   padding: 12px 15px;
+  align-content: center;
 }
 
 #table tbody tr {
@@ -157,6 +154,7 @@ table .statename {
 table .transition_cell {
   background-color: white;
   text-align: center;
+  align-items: center;
 }
 
 table .transition_input {
@@ -171,6 +169,7 @@ table .state_cell {
 }
 
 #check_final {
+  background-color: lightgray;
   width: 10px;
   height: 10px;
 }

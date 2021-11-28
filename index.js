@@ -1,6 +1,3 @@
-
-
-
 let nfa = []
 let dfa = []
 let done = []
@@ -10,19 +7,21 @@ let language = []
 let state_nb
 let states = []
 let output_format;
+let transition_string
+let send = ``;
 
+
+//function to be called on load
 function loader() {
-
   var form = document.getElementById("form");
   function handleForm(event) { event.preventDefault(); }
   form.addEventListener('submit', handleForm);
   document.getElementById("accordion").disabled = true;
   radio_value()
   snackbar(false)
-
 }
 
-
+//function to be called when user submit language and number of state
 function submit_form() {
 
   var lang = document.getElementById('language').value;
@@ -30,6 +29,7 @@ function submit_form() {
 
   state_nb = document.getElementById('number').value;
 
+  //create table structure according to input
   create_table();
 
   document.getElementById("accordion").disabled = false;
@@ -49,8 +49,8 @@ function submit_form() {
   
 }
 
+//function to create table and append it in HTML page
 function create_table() {
-
 
   for (var i = 1; i <= state_nb; i++) {
     let temp = `Q${i}`
@@ -63,24 +63,25 @@ function create_table() {
   tbl.setAttribute("id", "table");
 
   container.appendChild(tbl);
+  
+//rows depends on state number of states
   for (let i = 0; i <= state_nb; i++) {
 
     const tr = tbl.insertRow();
-
+//columns depends on number of language strings
     for (let j = 0; j <= language.length + 1; j++) {
-
 
       if (i == 0) {
 
         if (j == 0) {
-
+          //element 0,0 
           const td = tr.insertCell();
           td.setAttribute("class", "first");
           td.appendChild(document.createTextNode(`State Name`));
 
         }
         else if (j == 1) {
-
+        //element 0,1 
           const td = tr.insertCell();
           td.setAttribute("class", "first");
           td.appendChild(document.createTextNode(`Final State`));
@@ -88,6 +89,7 @@ function create_table() {
         }
 
         else {
+          //elements 0,n (language)
           const td = tr.insertCell();
           td.setAttribute("class", "lang");
           td.appendChild(document.createTextNode(`${language[j - 2]}`));
@@ -97,7 +99,7 @@ function create_table() {
       }
 
       else {
-
+        //column 0 contains states name
         if (j == 0) {
           const td = tr.insertCell();
           td.setAttribute("class", "state_cell");
@@ -105,14 +107,15 @@ function create_table() {
           const input = document.createElement("input");
           input.setAttribute("type", "text");
           input.setAttribute("class", "statename");
-
+          input.setAttribute("disabled", "true");
           input.setAttribute("onclick", "findtable()");
           input.setAttribute("value", `Q${i}`);
 
           td.appendChild(input);
         }
-        else if (j == 1) {
 
+        else if (j == 1) {
+          //column 1 contains checkbox to check final state(s)
           const td = tr.insertCell();
 
           td.setAttribute("class", "transition_cell");
@@ -123,20 +126,19 @@ function create_table() {
           if (i==1) {
             input.setAttribute("checked", "checked");
           }
-          
           input.setAttribute("onclick", "findtable()");
           td.appendChild(input);
 
         }
+
         else {
+          //other columns for user to add transitions using multi-select box
           const td = tr.insertCell();
           td.setAttribute("class", "transition_cell");
-
           //Create and append select list
           var selectList = document.createElement("select");
 
           selectList.setAttribute("class", "mySelect");
-          // selectList.setAttribute("id", `check${i}${j}`);
           selectList.setAttribute("id", `myMulti`);
           selectList.setAttribute("multiple", "true");
           selectList.addEventListener('change', function () {
@@ -171,11 +173,7 @@ function create_table() {
 }
 
 
-
-let transition_string
-
-let send = ``;
-
+//get transitions from table
 function findtable() {
  
   nfa = []
@@ -195,17 +193,18 @@ function findtable() {
     //item(0) to get name from first column
     const myVar = objCells.item(0).querySelector('input').value;
 
+    //get states from rows except row nb 0
     if (myVar != `State Name`) {
       myObject[`name`] = myVar;
       states.push(myVar);
       var info = document.getElementById('demo');
-      // info.innerHTML += ` ` + myVar;
     }
 
     // LOOP THROUGH EACH CELL OF THE CURENT ROW TO READ CELL VALUES.
     for (var j = 2; j < objCells.length; j++) {
       var counter = j - 2;
 
+      //check if final or not
       if (objCells.item(1).querySelector('.checkbox').checked) {
         myObject[`final`] = true;
       }
@@ -226,9 +225,10 @@ function findtable() {
 
 }
 
+//function to convert data to VIZ
 function write(objects) {
 
-
+  //check if at least one checkbox is checked to display error
 if (!atLeastOneCheckboxIsChecked()) {
   snackbar(true)
   return;
@@ -246,7 +246,6 @@ else{
 
   for (var i = 0; i < objects.length; i++) {
 
-
     var name = objects[i].name;
     if (objects[i].final == true) {
       transition_string += `${name} [shape=doublecircle]`
@@ -258,19 +257,18 @@ else{
     language.map(x => {
     
       if (objects[i][x]) {
-        
         transition_string += ` ${name} -> ${objects[i][x]} [label=${x}];`
       }
-  
     })
-
   }
-  send = `digraph { rankdir=LR;
-	size="8,5"
-    init [label="", shape=point]
-    node [shape = doublecircle]; 
-    init -> ${objects[0].name} [style="solid"]
-	node [shape = circle];  ${transition_string}} `
+      //add syntax to GraphViz 
+    send = `digraph { rankdir=LR;
+    size="8,5"
+      init [label="", shape=point]
+      node [shape = doublecircle]; 
+      init -> ${objects[0].name} [style="solid"]
+    node [shape = circle];  ${transition_string}} `
+
   if (objects == nfa) {
     draw_nfa(send);
   }
@@ -279,6 +277,7 @@ else{
   }
 }
 
+//function to draw NFA
 function draw_nfa(input) {
   if (output_format == `SVG`) {
     // SVG
@@ -299,7 +298,7 @@ function draw_nfa(input) {
   convertDFA();
 }
 
-
+//function to draw DFA
 function draw_dfa(input) {
 
   if (output_format == `SVG`) {
@@ -332,56 +331,57 @@ function check_string() {
   let trap = false
   let print = `${dfa[0].name}`
  
+  //take first digit until all checked
   while (string) {
-
    
   digit = string.charAt(0);
-
+//if transition leads to TRAP/DEADSTATE
   if (dfa[test][`${digit}`] == `TRAP`) {
     trap = true
     print += `--${digit}--> TRAP `
     break;
   }
-
+//if transition leads to a DFA STATE
   else if (dfa[test][`${digit}`]) {
 
     let a = dfa[test][`${digit}`];
     print += `--${digit}--> ${dfa[test][`${digit}`]}  `
     test = dfa.findIndex(x => x.name === a);
     string = string.slice(1);
-
   }
-
+//if reached state / or /  digit not found
     else {
       print += `--${digit}--> X `
       break;
     }
   }
+
   receive = document.getElementById('receive')
- 
+ //if string reached trap
   if (trap) {
     
     output2.innerHTML = '✘ REJECTED: ';
   
   }
-
+  //if string reached a final state
   else if (dfa[test][`final`] && searchStringInArray(digit, language) !== -1) {
  
     output2.innerHTML = '✔ ACCEPTED: ';
    
   }
+  //else
   else {
-   
     output2.innerHTML = '✘ REJECTED: ';
-   
   }
+
   output2.innerHTML += `` + print;
 }
 
+//function to convert NFA to DFA
 function convertDFA() {
 
   let trap = false
-  dfa = []
+   dfa = []
    done = []
    added = []
    difference = []
@@ -390,13 +390,14 @@ function convertDFA() {
   myObject[`name`] = nfa[0][`name`];
   myObject[`final`] = nfa[0][`final`];
 
+  //map on language
   language.map(x => {
 
+    //if transition is not empty
     if (nfa[0][x]) {
 
       //remove space
       nfa[0][x] = nfa[0][x].replace(/\s/g, '');
-
       myObject[x] = nfa[0][x]
       added.push(nfa[0][x])
 
@@ -415,20 +416,17 @@ function convertDFA() {
   //remove duplicated states
   added = uniq_fast(added)
 
+  //function to get difference betweeen added & done
   diff();
 
   dfa.push(myObject);
 
- 
-
-  var count = 0;
   while (difference!=0) {
-    count++;
+    
     added = uniq_fast(added);
     done = uniq_fast(done);
 
     var test = difference[0].split(',');
-
 
     //remove comma from name since it is not compatible with Viz
     var name = difference[0].replace("", "");
@@ -441,8 +439,10 @@ function convertDFA() {
 
 //transition contains 1 state
     if (test.length == 1) {
+      //loop according to language
       language.map(x => {
-
+        
+        //if transition not empty
         if (nfa[number - 1][x]) {
           myObject[x] = nfa[number - 1][x];
           added.push(nfa[number - 1][x])
@@ -469,6 +469,7 @@ function convertDFA() {
       diff();
       let check_final = false
       let temp_string = ``
+        //loop according to language
       language.map(x => {
         var nb
         temp_string = ``;
@@ -476,30 +477,26 @@ function convertDFA() {
         test.forEach(element => {
           nb = element.replace(/^\D+/g, '');
           nb--;
-
+          //check if final
           if (nfa[nb][`final`] == true) {
             check_final = true;
           }
-
+          //check if not empty
           if (nfa[nb][x]) {
             temp_string += nfa[nb][x] + `,`
           }
         });
-
-        //remove , from the end
+        //remove , from the end 
         temp_string = temp_string.replace(/,$/, "").replace(/ /g, '');
-
+        //create array and sort
         temp_array = temp_string.split(",")
-
         temp_array = temp_array.sort();
         temp_array = uniq_fast(temp_array)
-    
+        //return array back to string
         temp_string = temp_array.join(",");
-
         myObject[x] = temp_string;
-       
         temp_string = temp_string.replace(/\s/g, '');
-
+        //check if not empty
         if (temp_string != '') {
           added.push(temp_string)
         }
@@ -507,6 +504,7 @@ function convertDFA() {
         added = uniq_fast(added)
         diff();
       });
+      
       added = uniq_fast(added);
       done = uniq_fast(done);
       myObject['final'] = check_final;

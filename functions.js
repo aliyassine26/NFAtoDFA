@@ -112,6 +112,7 @@ function atLeastOneCheckboxIsChecked(){
   return checkboxes.reduce((acc, curr) => acc || curr.checked, false);
 }
 
+//display error
 function snackbar(bool) {
   var x = document.getElementById("snackbar");
   
