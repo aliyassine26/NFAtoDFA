@@ -1,117 +1,122 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- GraphViz libraries -->
-    <script src=https://d3js.org/d3.v5.min.js></script>
-    <script src=https://unpkg.com/viz.js@1.8.0/viz.js></script>
-    <script src=https://unpkg.com/d3-graphviz@1.5.0/build/d3-graphviz.min.js></script>
-    <!-- Jquery Libraries -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <!-- GraphViz libraries -->
+  <script src=https://d3js.org/d3.v5.min.js></script>
+  <script src=https://unpkg.com/viz.js@1.8.0/viz.js></script>
+  <script src=https://unpkg.com/d3-graphviz@1.5.0/build/d3-graphviz.min.js></script>
+  <!-- Jquery Libraries -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-    <!-- Fonts libraries -->
-    <link rel='stylesheet' href='https://fonts.googleapis.com/icon?family=Material+Icons'>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <!-- Fonts libraries -->
+  <link rel='stylesheet' href='https://fonts.googleapis.com/icon?family=Material+Icons'>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-   <!-- Bootstrap Libraries-->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <!-- W3schools Library -->
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <!-- Bootstrap Libraries-->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <!-- W3schools Library -->
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
-    <script src="JavaScript/index.js"></script>
-    <script src="JavaScript/functions.js"></script>
-    <link rel="stylesheet" href="style/styles.css">
-    <link rel="stylesheet" href="style/nav.css">
-    <link rel="stylesheet" href="style/learn.css">
-    <script src="JavaScript/functions.js"></script>
+  <script src="JavaScript/index.js"></script>
+  <script src="JavaScript/functions.js"></script>
+  <link rel="stylesheet" href="style/styles.css">
+  <link rel="stylesheet" href="style/nav.css">
+  <link rel="stylesheet" href="style/learn.css">
+  <script src="JavaScript/functions.js"></script>
 
-    <title>Learn More</title>
+  <title>Learn More</title>
 </head>
+
 <body>
 
-    <div class="topnav" id="myTopnav">
-        <a href="#" class="logo" aria-disabled="true">NFA to DFA</a>
-        <a href="index.html" >Home</a>
-        <a href="learn.html"class="active">Learn More</a>
-        <div id="right">
-          <a href="https://github.com/aliyassine26/NFAtoDFA" class=""><i class="fa fa-github"></i> GitHub</a>
-        </div>
-        <a href="javascript:void(0);" class="icon" onclick="myFunction()">
-          <i class="fa fa-bars"></i>
-        </a>
-      </div>
-      
-      <h1 id="title">Learn more about Finite State Automata</h1>
+  <div class="topnav" id="myTopnav">
+    <a href="#" class="logo" aria-disabled="true">NFA to DFA</a>
+    <a href="index.html">Home</a>
+    <a href="learn.html" class="active">Learn More</a>
+    <div id="right">
+      <a href="https://github.com/aliyassine26/NFAtoDFA" target="_blank" class=""><i class="fa fa-github"></i> GitHub</a>
+    </div>
+    <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+      <i class="fa fa-bars"></i>
+    </a>
+  </div>
 
-      <div class="container1">
-        <h1>Introduction of Finite Automata</h1>
-       <p>Finite Automata(FA) is the simplest machine to recognize patterns. 
-           The finite automata or finite state machine is an abstract machine that has five elements or tuples. 
-           It has a set of states and rules for moving from one state to another but it depends upon the applied input symbol. Basically, it is an abstract model of a digital computer. 
-           The following figure shows some essential features of general automation.</p>
-        </div>
+  <h1 id="title">Learn more about Finite State Automata</h1>
 
-        <div class="container1">
-            <h1>A Finite Automata consists of the following : </h1>
-            
-        <ul>
-            <li> Q : Finite set of states.</li>
-            <li>Σ : set of Input Symbols.</li>
-            <li>q : Initial state.</li>
-            <li>F : set of Final States.</li>
-            <li>δ : Transition Function.</li>
+  <div class="container1">
+    <h1>Introduction of Finite Automata</h1>
+    <p>Finite Automata(FA) is the simplest machine to recognize patterns.
+      The finite automata or finite state machine is an abstract machine that has five elements or tuples.
+      It has a set of states and rules for moving from one state to another but it depends upon the applied input
+      symbol. Basically, it is an abstract model of a digital computer.
+      The following figure shows some essential features of general automation.</p>
+  </div>
 
-        </ul>       
-       </div>
-    
+  <div class="container1">
+    <h1>A Finite Automata consists of the following : </h1>
 
-       <div class="container1">
-        <h1>FA is characterized into two types: </h1>
-       <ol>
+    <ul>
+      <li> Q : Finite set of states.</li>
+      <li>Σ : set of Input Symbols.</li>
+      <li>q : Initial state.</li>
+      <li>F : set of Final States.</li>
+      <li>δ : Transition Function.</li>
 
-        <li>Deterministic Finite Automata (DFA)</li>
-        <li>Nondeterministic Finite Automata(NFA) </li>
-        
-       </ol>
-        </div>
+    </ul>
+  </div>
 
 
-      <div class="container1">
-        <h1>DFA Characteristics</h1>
-       <Ul>
-       <li>DFA: Deterministic Finite Automata</li>  
-       <li>A DFA is a 5-tuple (Q,ε,𝛿,q,F)</li>
-       <li>Q is a finite set called the states</li>
-       <li>ε is a finite set called the alphabet</li>
-       <li>𝛿:Q×ε→p(Q) is the transition function</li>
-       <li>q∈Q is the start state</li>
-       <li>F⊆Q is the set of accept/final state</li>
-       
-        </Ul>
-        </div>
-        
-        
-        <div class="container1">
-            <h1>NFA Characteristics</h1>
-            <Ul>
-            <li>NFA: Deterministic Finite Automata</li>
-            <li>A NFA is a 5-tuple (Q,ε,𝛿,q,F)</li>
-           
-            <li>For any set Q,p(Q) is the collection of all subset of Q</li>
-            <li>q∈Q is the start state</li>
-            <li>F⊆Q is the set of accept/final state</li>
-             </Ul>
-        </div>
-        
-    
-<p id="source">Source: <a href=" https://www.geeksforgeeks.org/introduction-of-finite-automata/">www.geeksforgeeks.org/introduction-of-finite-automata/</a>  </p>
+  <div class="container1">
+    <h1>FA is characterized into two types: </h1>
+    <ol>
+
+      <li>Deterministic Finite Automata (DFA)</li>
+      <li>Nondeterministic Finite Automata(NFA) </li>
+
+    </ol>
+  </div>
+
+
+  <div class="container1">
+    <h1>DFA Characteristics</h1>
+    <Ul>
+      <li>DFA: Deterministic Finite Automata</li>
+      <li>A DFA is a 5-tuple (Q,ε,𝛿,q,F)</li>
+      <li>Q is a finite set called the states</li>
+      <li>ε is a finite set called the alphabet</li>
+      <li>𝛿:Q×ε→p(Q) is the transition function</li>
+      <li>q∈Q is the start state</li>
+      <li>F⊆Q is the set of accept/final state</li>
+
+    </Ul>
+  </div>
+
+
+  <div class="container1">
+    <h1>NFA Characteristics</h1>
+    <Ul>
+      <li>NFA: Deterministic Finite Automata</li>
+      <li>A NFA is a 5-tuple (Q,ε,𝛿,q,F)</li>
+
+      <li>For any set Q,p(Q) is the collection of all subset of Q</li>
+      <li>q∈Q is the start state</li>
+      <li>F⊆Q is the set of accept/final state</li>
+    </Ul>
+  </div>
+
+
+  <p id="source">Source: <a target="_blank" href=" https://www.geeksforgeeks.org/introduction-of-finite-automata/">www.geeksforgeeks.org/introduction-of-finite-automata/</a>
+  </p>
 
 </body>
+
 </html>

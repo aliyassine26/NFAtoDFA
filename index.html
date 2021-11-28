@@ -1,42 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- GraphViz libraries -->
-    <script src=https://d3js.org/d3.v5.min.js></script>
-    <script src=https://unpkg.com/viz.js@1.8.0/viz.js></script>
-    <script src=https://unpkg.com/d3-graphviz@1.5.0/build/d3-graphviz.min.js></script>
-    <!-- Jquery Libraries -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <!-- GraphViz libraries -->
+  <script src=https://d3js.org/d3.v5.min.js></script>
+  <script src=https://unpkg.com/viz.js@1.8.0/viz.js></script>
+  <script src=https://unpkg.com/d3-graphviz@1.5.0/build/d3-graphviz.min.js></script>
+  <!-- Jquery Libraries -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-    <!-- Fonts libraries -->
-    <link rel='stylesheet' href='https://fonts.googleapis.com/icon?family=Material+Icons'>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <!-- Fonts libraries -->
+  <link rel='stylesheet' href='https://fonts.googleapis.com/icon?family=Material+Icons'>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-   <!-- Bootstrap Libraries-->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <!-- W3schools Library -->
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <!-- Bootstrap Libraries-->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <!-- W3schools Library -->
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
-    <script src="JavaScript/index.js"></script>
-    <script src="JavaScript/functions.js"></script>
-    <link rel="stylesheet" href="style/styles.css">
-    <link rel="stylesheet" href="style/radio.css">
-    <link rel="stylesheet" href="style/snackbar.css">
-    <link rel="stylesheet" href="style/nav.css">
+  <script src="JavaScript/index.js"></script>
+  <script src="JavaScript/functions.js"></script>
+  <link rel="stylesheet" href="style/styles.css">
+  <link rel="stylesheet" href="style/radio.css">
+  <link rel="stylesheet" href="style/snackbar.css">
+  <link rel="stylesheet" href="style/nav.css">
 
-    <title>NFA to DFA</title>
-    
+  <title>NFA to DFA</title>
+
 </head>
 
-<body onload="loader()" >
+<body onload="loader()">
 
 
   <div class="topnav" id="myTopnav">
@@ -44,110 +45,114 @@
     <a href="#" class="active">Home</a>
     <a href="learn.html" class="">Learn More</a>
     <div id="right">
-      <a href="https://github.com/aliyassine26/NFAtoDFA" class=""><i class="fa fa-github"></i> GitHub</a>
+      <a href="https://github.com/aliyassine26/NFAtoDFA" target="_blank" class=""><i class="fa fa-github"></i>
+        GitHub</a>
     </div>
     <a href="javascript:void(0);" class="icon" onclick="myFunction()">
       <i class="fa fa-bars"></i>
     </a>
   </div>
 
-<br><br>
+  <br><br>
 
-<table id="input" align="center" >
+  <table id="input" align="center">
     <tr>
-        <th>Language</th>
-        <th>Number of states</th>
-      
+      <th>Language</th>
+      <th>Number of states</th>
+
     </tr>
 
     <tr>
-    <form id="form" name="form" onsubmit="return submit_form()">
-       <td><input type="text" id="language" name="language" value="" onkeypress="return /[a-z0-9-]/i.test(event.key)" placeholder="Seperated by - only" required></td>
-       <td> <input type="number" id="number" name="number" value="" min="1" onkeypress="return /[0-9]/i.test(event.key)" placeholder="Only numbers are accepted" required></td>
+      <form id="form" name="form" onsubmit="return submit_form()">
+        <td><input type="text" id="language" name="language" value="" onkeypress="return /[a-z0-9-]/i.test(event.key)"
+            placeholder="Seperated by - only" required></td>
+        <td> <input type="number" id="number" name="number" value="" min="1"
+            onkeypress="return /[0-9]/i.test(event.key)" placeholder="Only numbers are accepted" required></td>
     </tr>
 
 
 
-</table>
-<div id="buttons">
-<input type="submit" class="btn" id="submit" value="Submit" ></td>
-<input class="btn" id="reset" type="reset" onclick="delete_table()"></td>
-</div>
-</form>
-<br> <br> <br>
+  </table>
+  <div id="buttons">
+    <input type="submit" class="btn" id="submit" value="Submit"></td>
+    <input class="btn" id="reset" type="reset" onclick="delete_table()"></td>
+  </div>
+  </form>
+  <br> <br> <br>
 
-<center>
+  <center>
 
     <!-- empty div that will contain NFA transition table -->
-<div id="in_table"> 
- 
-  
-</div>
-
-<div class="radio">
-  <h2>Output Format</h2>
-<div class="switch-field">
-  <input type="radio" id="radio-one" name="switch-one" value="SVG" checked/>
-  <label for="radio-one">SVG</label>
-  <input type="radio" id="radio-two" name="switch-one" value="PNG" />
-  <label for="radio-two">PNG</label>
-</div>
-
-</div>
+    <div id="in_table">
 
 
-<!-- empty div that will contain NFA image -->
-<div class="container1">
-<h1>NFA</h1>
-</div>
-<div id="graph"> </div>
-
-<div class="container1">
-<h1>DFA</h1>
-<div id="graph2"> </div>
-</div>
-<button class="accordion" id="accordion">Check String</button>
-<div class="panel">
-  
-        <input type="text" id="check_string" name="check_string" required>
-        <button id="submit" class="btn" onclick="check_string()" value="check">Check</button>
-        <button id="reset" class="btn" onclick="reset_string()" value="check">Clear</button>
-        <p id="receive"></p>
-    
-        <div id="out" class="w3-container">
-        <i class="fa fa-arrow-down" id="icon"></i>  <h2 id="output">Output displayed here</h2>
-          </div>
     </div>
-           <div id="whitespace">
 
-           </div>
-         
-</center>
-<div id="snackbar"><i class="fa fa-exclamation-circle"></i> Error: Add a final state</div>
+    <div class="radio">
+      <h2>Output Format</h2>
+      <div class="switch-field">
+        <input type="radio" id="radio-one" name="switch-one" value="SVG" checked />
+        <label for="radio-one">SVG</label>
+        <input type="radio" id="radio-two" name="switch-one" value="PNG" />
+        <label for="radio-two">PNG</label>
+      </div>
+
+    </div>
+
+
+    <!-- empty div that will contain NFA image -->
+    <div class="container1">
+      <h1>NFA</h1>
+    </div>
+    <div id="graph"> </div>
+
+    <div class="container1">
+      <h1>DFA</h1>
+      <div id="graph2"> </div>
+    </div>
+    <button class="accordion" id="accordion">Check String</button>
+    <div class="panel">
+
+      <input type="text" id="check_string" name="check_string" required>
+      <button id="submit" class="btn" onclick="check_string()" value="check">Check</button>
+      <button id="reset" class="btn" onclick="reset_string()" value="check">Clear</button>
+      <p id="receive"></p>
+
+      <div id="out" class="w3-container">
+        <i class="fa fa-arrow-down" id="icon"></i>
+        <h2 id="output">Output displayed here</h2>
+      </div>
+    </div>
+    <div id="whitespace">
+
+    </div>
+
+  </center>
+  <div id="snackbar"><i class="fa fa-exclamation-circle"></i> Error: Add a final state</div>
 </body>
 
 <script>
-var radios = document.querySelectorAll('input[type=radio][name="switch-one"]');
+  var radios = document.querySelectorAll('input[type=radio][name="switch-one"]');
   radios.forEach(radio => radio.addEventListener('change', () => radio_value()));
   $(".radio").hide();
-    var acc = document.getElementsByClassName("accordion");
-var i;
+  var acc = document.getElementsByClassName("accordion");
+  var i;
 
-for (i = 0; i < acc.length; i++) {
-  acc[i].addEventListener("click", function() {
-    this.classList.toggle("active");
-    var panel = this.nextElementSibling;
-    if (panel.style.display === "block") {
-      panel.style.display = "none";
-    } else {
-      panel.style.display = "block";
-    }
-  });
-}
+  for (i = 0; i < acc.length; i++) {
+    acc[i].addEventListener("click", function () {
+      this.classList.toggle("active");
+      var panel = this.nextElementSibling;
+      if (panel.style.display === "block") {
+        panel.style.display = "none";
+      } else {
+        panel.style.display = "block";
+      }
+    });
+  }
 
 
 </script>
 
 
 
-</html>     
+</html>
