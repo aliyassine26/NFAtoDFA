@@ -5,30 +5,34 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <!-- GraphViz libraries -->
     <script src=https://d3js.org/d3.v5.min.js></script>
     <script src=https://unpkg.com/viz.js@1.8.0/viz.js></script>
     <script src=https://unpkg.com/d3-graphviz@1.5.0/build/d3-graphviz.min.js></script>
-
+    <!-- Jquery Libraries -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
-    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Raleway'>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Fonts libraries -->
     <link rel='stylesheet' href='https://fonts.googleapis.com/icon?family=Material+Icons'>
-    <!-- <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css"> -->
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
-    <script src="index.js"></script>
-    <script src="functions.js"></script>
+   <!-- Bootstrap Libraries-->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <!-- W3schools Library -->
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+    <script src="JavaScript/index.js"></script>
+    <script src="JavaScript/functions.js"></script>
     <link rel="stylesheet" href="style/styles.css">
     <link rel="stylesheet" href="style/radio.css">
     <link rel="stylesheet" href="style/snackbar.css">
     <link rel="stylesheet" href="style/nav.css">
-    <title>NFAtoDFA</title>
-    
+
+    <title>NFA to DFA</title>
     
 </head>
 
@@ -58,8 +62,8 @@
 
     <tr>
     <form id="form" name="form" onsubmit="return submit_form()">
-       <td><input type="text" id="language" name="language" value="0-1" onkeypress="return /[a-z 0-9 -]/i.test(event.key)" placeholder="Seperated by - only" required></td>
-       <td> <input type="number" id="number" name="number" value="2" min="1" onkeypress="return /[0-9]/i.test(event.key)" placeholder="Only numbers are accepted" required></td>
+       <td><input type="text" id="language" name="language" value="" onkeypress="return /[a-z0-9-]/i.test(event.key)" placeholder="Seperated by - only" required></td>
+       <td> <input type="number" id="number" name="number" value="" min="1" onkeypress="return /[0-9]/i.test(event.key)" placeholder="Only numbers are accepted" required></td>
     </tr>
 
 

@@ -26,6 +26,8 @@ function submit_form() {
 
   var lang = document.getElementById('language').value;
   language = lang.split("-");
+  //remove null elements
+  language = language.filter(Boolean);
 
   state_nb = document.getElementById('number').value;
 
@@ -38,6 +40,10 @@ function submit_form() {
   btn.disabled = true
   $(".radio").show();
   
+
+  document.getElementById("language").disabled = true;
+  document.getElementById("number").disabled = true;
+
   //fill 'enter string' with random number
   let string = ``
   for (let i = 0; i < states.length+1; i++) {

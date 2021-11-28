@@ -91,6 +91,9 @@ difference = added.filter((val)=> done.indexOf(val) == -1);
   
     document.getElementById("accordion").disabled = true;
   
+    document.getElementById("language").disabled = false;
+    document.getElementById("number").disabled = false;
+
     states = []
     let send = ''
     $(".radio").hide();
